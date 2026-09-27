@@ -118,7 +118,7 @@
         ".tsx",
         ".jsx"
       ],
-      "pattern": "<[^>]+\\sstyle=\\{\\{",
+      "pattern": "\\bstyle\\s*=\\s*\\{\\{",
       "flags": "gi",
       "message": "Inline style object detected in JSX/TSX.",
       "rationale": "Repeated inline visual values bypass reusable tokens and component variants.",
@@ -192,7 +192,7 @@
         ".css",
         ".scss"
       ],
-      "pattern": "(?:animation|transition)-duration\\s*:\\s*(?:[89]\\d{2}|[1-9]\\d{3,})ms\\b",
+      "pattern": "(?:animation|transition)(?:-duration)?\\s*:[^;\\n]*(?:[89]\\d{2}|[1-9]\\d{3,})ms\\b",
       "flags": "gi",
       "message": "Long UI animation duration detected.",
       "rationale": "Operational interfaces should not make users wait for decorative motion.",
