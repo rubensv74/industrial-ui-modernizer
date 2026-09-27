@@ -15,6 +15,24 @@ Read the repository root `PRODUCT.md`, `DESIGN.md`, and `AGENTS.md` once per tas
 
 Do not infer missing business behavior from visual appearance.
 
+## Product profiles
+
+When the target belongs to a registered product, load its profile before applying generic IUM guidance.
+
+For AssetPlan:
+
+```bash
+npm run profile -- assetplan ui component --json
+```
+
+The profile defines authority precedence and the product sources that must be consulted for the requested scope. Product sources outrank generic IUM rules. A profile must not duplicate versioned component selections that belong to the product registry.
+
+Current profile:
+
+- `profiles/assetplan/profile.json`
+
+If a product profile exists, report which profile was applied and keep product-governance findings separate from generic IUM detector findings.
+
 ## Command routing
 
 | Command | Purpose | Reference |
