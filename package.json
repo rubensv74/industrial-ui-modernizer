@@ -8,6 +8,7 @@
   },
   "scripts": {
     "audit": "node ./bin/ium-audit.mjs .",
-    "test": "node --test ./tests/rule-engine.test.mjs"
+    "test": "node --test ./tests/*.test.mjs",
+    "profile": "node ./bin/ium-profile.mjs"
   }
 }
