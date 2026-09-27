@@ -26,7 +26,8 @@ Key files:
 - `AGENTS.md` — agent operating contract.
 - `.agents/skills/industrial-ui-modernizer/SKILL.md` — command routing and workflow.
 - `design-intelligence/rules/source-rules.json` — deterministic source checks.
-- `bin/ium-audit.mjs` — zero-dependency source detector.
+- `bin/ium-audit.mjs` — zero-dependency web/frontend source detector.
+- `bin/ium-powerapps-audit.mjs` — deterministic Power Apps `*.pa.yaml` component auditor.
 - `docs/architecture/DESIGN-INTELLIGENCE-V1.md` — architecture and validation model.
 - `profiles/assetplan/profile.json` — AssetPlan authority/adaptation profile.
 - `bin/ium-profile.mjs` — product-profile authority resolver.
@@ -57,9 +58,10 @@ npm run audit
 node ./bin/ium-audit.mjs ./src
 node ./bin/ium-audit.mjs ./src --json
 npm run profile -- assetplan ui component
+npm run audit:powerapps -- ./power-apps/components
 ```
 
-Detector findings are evidence, not a substitute for visual review. Rules that require runtime layout, semantic understanding, or screenshot comparison stay in the agent workflow rather than pretending a regex can prove them.
+Detector findings are evidence, not a substitute for runtime or visual review. The Power Apps auditor is specifically designed to catch repeatable Source Code Schema contract and component-boundary defects before Studio. Rules that require runtime layout, semantic understanding, or screenshot comparison stay in the agent workflow rather than pretending a regex can prove them.
 
 ## Status
 
