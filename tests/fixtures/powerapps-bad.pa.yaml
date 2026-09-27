@@ -1,0 +1,48 @@
+ComponentDefinitions:
+  cmp_AP_BadTree:
+    DefinitionType: CanvasComponent
+    CustomProperties:
+      Items:
+        PropertyKind: Input
+        DisplayName: Items
+        DataType: Table
+        Default: =Table()
+      MaxDepth:
+        PropertyKind: Input
+        DisplayName: MaxDepth
+        DataType: Number
+        Default: =6
+      SelectedKeyOut:
+        PropertyKind: Output
+        DisplayName: SelectedKeyOut
+        DataType: Text
+      OnNodeSelect:
+        PropertyKind: Event
+        DisplayName: OnNodeSelect
+        Description: Emits selected key and label.
+        ReturnType: None
+        Default: =Blank()
+    Properties:
+      Fill: =Color.Transparent
+      Height: =300
+      Width: =300
+    Children:
+      - galRows:
+          Control: Gallery@2.15.0
+          Variant: Vertical
+          Properties:
+            Items: |-
+              =With({p1:LookUp(Items,true),p2:LookUp(Items,true)},Items)
+          Children:
+            - btnSmall:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  Height: =28
+                  Width: =28
+                  OnSelect: =Flow_DoThing.Run()
+            - imgRow:
+                Control: Image@2.2.3
+                Properties:
+                  Height: =20
+                  Width: =20
+                  OnSelect: =Select(Parent)

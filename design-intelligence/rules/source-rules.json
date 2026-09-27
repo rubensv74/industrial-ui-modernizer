@@ -1,0 +1,235 @@
+{
+  "version": "1.0.0",
+  "description": "Deterministic source rules for Industrial UI Modernizer. These rules flag objective or high-signal source patterns; they do not replace runtime or visual review.",
+  "rules": [
+    {
+      "id": "IUM-MOTION-001",
+      "category": "motion",
+      "severity": "warning",
+      "extensions": [
+        ".css",
+        ".scss",
+        ".tsx",
+        ".jsx",
+        ".ts",
+        ".js",
+        ".html"
+      ],
+      "pattern": "\\btransition-all\\b|transition\\s*:\\s*all\\b",
+      "flags": "gi",
+      "message": "Avoid transition-all; transition only properties that are intentionally animated.",
+      "rationale": "Broad transitions create accidental motion and make interaction behavior harder to reason about.",
+      "suggestion": "List the specific properties that should transition."
+    },
+    {
+      "id": "IUM-COLOR-001",
+      "category": "color",
+      "severity": "warning",
+      "extensions": [
+        ".css",
+        ".scss",
+        ".tsx",
+        ".jsx",
+        ".ts",
+        ".js",
+        ".html"
+      ],
+      "pattern": "#000(?:000)?\\b|rgb\\(\\s*0\\s*,\\s*0\\s*,\\s*0\\s*\\)",
+      "flags": "gi",
+      "message": "Pure black is a design-system smell in operational UI.",
+      "rationale": "Semantic text/surface tokens make theming and hierarchy easier to control.",
+      "suggestion": "Use the product's semantic text or surface token unless pure black is explicitly required."
+    },
+    {
+      "id": "IUM-COLOR-002",
+      "category": "color",
+      "severity": "warning",
+      "extensions": [
+        ".css",
+        ".scss"
+      ],
+      "pattern": "\\bcolor\\s*:\\s*(?:gray|grey)\\b",
+      "flags": "gi",
+      "message": "Generic gray bypasses semantic color roles.",
+      "rationale": "Operational UI needs predictable primary, secondary, muted, disabled, and status text roles.",
+      "suggestion": "Use a semantic color token."
+    },
+    {
+      "id": "IUM-LAYOUT-001",
+      "category": "layout",
+      "severity": "warning",
+      "extensions": [
+        ".css",
+        ".scss"
+      ],
+      "pattern": "(?:^|[;{\\s])(?:width|min-width)\\s*:\\s*(?:1[2-9]\\d{2}|[2-9]\\d{3,})px\\b",
+      "flags": "gi",
+      "message": "Large fixed pixel width can turn the application shell into a desktop canvas.",
+      "rationale": "Primary layouts should reflow across supported viewports.",
+      "suggestion": "Use responsive grid/flex constraints and a deliberate max-width only when justified."
+    },
+    {
+      "id": "IUM-RESP-001",
+      "category": "responsive",
+      "severity": "warning",
+      "extensions": [
+        ".css",
+        ".scss"
+      ],
+      "pattern": "(?:height|min-height)\\s*:\\s*100vh\\b",
+      "flags": "gi",
+      "message": "100vh can be unsafe for mobile browser chrome and nested application shells.",
+      "rationale": "Viewport units can clip content on mobile and inside embedded shells.",
+      "suggestion": "Prefer modern dynamic viewport units or content-driven sizing when appropriate."
+    },
+    {
+      "id": "IUM-LAYOUT-002",
+      "category": "layout",
+      "severity": "warning",
+      "extensions": [
+        ".css",
+        ".scss"
+      ],
+      "pattern": "\\boverflow\\s*:\\s*hidden\\b",
+      "flags": "gi",
+      "message": "Hidden overflow may conceal a layout defect or inaccessible content.",
+      "rationale": "Clipping is often used as a patch for incorrect responsive geometry.",
+      "suggestion": "Confirm the clipping is intentional and no essential content/focus indicator is lost."
+    },
+    {
+      "id": "IUM-LAYOUT-003",
+      "category": "layout",
+      "severity": "warning",
+      "extensions": [
+        ".css",
+        ".scss"
+      ],
+      "pattern": "\\bz-index\\s*:\\s*[1-9]\\d{3,}\\b",
+      "flags": "gi",
+      "message": "Extreme z-index suggests unmanaged elevation layers.",
+      "rationale": "Large arbitrary z-index values create stacking-context conflicts across reusable components.",
+      "suggestion": "Use named elevation/layer tokens."
+    },
+    {
+      "id": "IUM-MAINT-001",
+      "category": "maintainability",
+      "severity": "warning",
+      "extensions": [
+        ".tsx",
+        ".jsx"
+      ],
+      "pattern": "\\bstyle\\s*=\\s*\\{\\{",
+      "flags": "gi",
+      "message": "Inline style object detected in JSX/TSX.",
+      "rationale": "Repeated inline visual values bypass reusable tokens and component variants.",
+      "suggestion": "Move stable styling to the design-system layer; retain inline style only for genuinely dynamic values."
+    },
+    {
+      "id": "IUM-A11Y-001",
+      "category": "a11y",
+      "severity": "error",
+      "extensions": [
+        ".tsx",
+        ".jsx"
+      ],
+      "pattern": "<(?:div|span)\\b[^>]*\\bonClick\\s*=",
+      "flags": "gi",
+      "message": "Clickable non-semantic element detected.",
+      "rationale": "Pointer-only div/span interactions commonly lose keyboard and native button/link behavior.",
+      "suggestion": "Use a button/link or provide the complete semantic keyboard contract when a native element cannot be used."
+    },
+    {
+      "id": "IUM-A11Y-002",
+      "category": "a11y",
+      "severity": "warning",
+      "extensions": [
+        ".css",
+        ".scss",
+        ".tsx",
+        ".jsx"
+      ],
+      "pattern": "\\boutline\\s*:\\s*(?:0|none)\\b|\\boutline-none\\b",
+      "flags": "gi",
+      "message": "Focus outline suppression detected.",
+      "rationale": "Removing the browser focus indicator without a replacement can make keyboard navigation invisible.",
+      "suggestion": "Provide a visible focus-visible style before suppressing the default outline."
+    },
+    {
+      "id": "IUM-TYPE-001",
+      "category": "typography",
+      "severity": "warning",
+      "extensions": [
+        ".css",
+        ".scss"
+      ],
+      "pattern": "\\bfont-size\\s*:\\s*(?:[0-9]|1[01])px\\b",
+      "flags": "gi",
+      "message": "Very small text declaration detected.",
+      "rationale": "Operational density should come from structure and spacing, not unreadably small type.",
+      "suggestion": "Use the documented dense-text token and verify legibility at the target display."
+    },
+    {
+      "id": "IUM-TYPE-002",
+      "category": "typography",
+      "severity": "warning",
+      "extensions": [
+        ".tsx",
+        ".jsx",
+        ".ts",
+        ".js"
+      ],
+      "pattern": "\\btext-\\[(?:[0-9]|1[01])px\\]",
+      "flags": "gi",
+      "message": "Very small arbitrary text size detected.",
+      "rationale": "Arbitrary micro-type is difficult to govern and often harms scanability.",
+      "suggestion": "Use a semantic typography token/class."
+    },
+    {
+      "id": "IUM-MOTION-002",
+      "category": "motion",
+      "severity": "warning",
+      "extensions": [
+        ".css",
+        ".scss"
+      ],
+      "pattern": "(?:animation|transition)(?:-duration)?\\s*:[^;\\n]*(?:[89]\\d{2}|[1-9]\\d{3,})ms\\b",
+      "flags": "gi",
+      "message": "Long UI animation duration detected.",
+      "rationale": "Operational interfaces should not make users wait for decorative motion.",
+      "suggestion": "Shorten the motion or document why the longer duration communicates essential state."
+    },
+    {
+      "id": "IUM-A11Y-003",
+      "category": "a11y",
+      "severity": "error",
+      "extensions": [
+        ".tsx",
+        ".jsx",
+        ".html"
+      ],
+      "pattern": "<img\\b(?![^>]*\\balt\\s*=)[^>]*>",
+      "flags": "gi",
+      "message": "Image without alt attribute detected.",
+      "rationale": "Images need an accessible text alternative or an explicit empty alt when decorative.",
+      "suggestion": "Add meaningful alt text, or alt=\"\" for a confirmed decorative image."
+    },
+    {
+      "id": "IUM-DESIGN-001",
+      "category": "maintainability",
+      "severity": "info",
+      "extensions": [
+        ".css",
+        ".scss",
+        ".tsx",
+        ".jsx",
+        ".ts",
+        ".js"
+      ],
+      "pattern": "font-family\\s*:[^;\\n]*\\bInter\\b|fontFamily\\s*:\\s*[\"']Inter[\"']",
+      "flags": "gi",
+      "message": "Inter is explicitly hard-coded.",
+      "rationale": "The framework should consume the product typography token rather than silently choosing a generic AI-default font.",
+      "suggestion": "Use the product font token; keep Inter only when it is an intentional documented choice."
+    }
+  ]
+}

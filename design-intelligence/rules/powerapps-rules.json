@@ -1,0 +1,55 @@
+{
+  "version": "1.0.0",
+  "description": "Deterministic checks for Power Apps Source Code Schema component YAML. Findings complement Studio/App Checker and never replace runtime or visual gates.",
+  "rules": [
+    {
+      "id": "IUM-PA-001",
+      "severity": "error",
+      "category": "contract",
+      "name": "emitting-event-needs-parameters",
+      "message": "Event description says it emits values but the Event declares no Parameters block."
+    },
+    {
+      "id": "IUM-PA-002",
+      "severity": "error",
+      "category": "contract",
+      "name": "output-needs-formula",
+      "message": "Output custom property has no corresponding formula in the component Properties section."
+    },
+    {
+      "id": "IUM-PA-003",
+      "severity": "warning",
+      "category": "architecture",
+      "name": "shared-component-external-run",
+      "message": "Shared component directly invokes an external .Run(...) action; verify the call belongs in the host boundary."
+    },
+    {
+      "id": "IUM-PA-004",
+      "severity": "warning",
+      "category": "architecture",
+      "name": "shared-component-data-mutation",
+      "message": "Shared component mutates host/business data with Patch/Collect/ClearCollect/Remove/RemoveIf; verify ownership."
+    },
+    {
+      "id": "IUM-PA-005",
+      "severity": "warning",
+      "category": "interaction",
+      "name": "undersized-button-hit-area",
+      "message": "Interactive Classic/Button has a fixed hit dimension below 40 px."
+    },
+    {
+      "id": "IUM-PA-006",
+      "severity": "warning",
+      "category": "interaction",
+      "name": "image-parent-select-only",
+      "message": "Interactive Image only calls Select(Parent); verify this also emits the row semantic action."
+    },
+    {
+      "id": "IUM-PA-007",
+      "severity": "error",
+      "category": "hierarchy",
+      "name": "manual-ancestor-chain-shorter-than-max-depth",
+      "message": "Manual pN ancestor chain is shorter than the declared MaxDepth contract."
+    }
+  ]
+}

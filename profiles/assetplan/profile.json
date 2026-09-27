@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "id": "assetplan",
+  "product": "AssetPlan",
+  "repository": "rubensv74/app_preserv",
+  "defaultBranch": "main",
+  "operatingMode": "Operate",
+  "purpose": "Apply Industrial UI Modernizer workflows to AssetPlan without duplicating or overriding AssetPlan product truth, visual governance, component lifecycle, or IAP adoption boundaries.",
+  "authorityPrecedence": [
+    {
+      "rank": 1,
+      "authority": "AssetPlan canonical product sources",
+      "rule": "Current AssetPlan ADRs, standards, registries, contracts, gates and runtime evidence always outrank this profile and generic IUM guidance."
+    },
+    {
+      "rank": 2,
+      "authority": "IAP contracts and shared assets explicitly adopted by AssetPlan",
+      "rule": "IAP may govern product-independent contracts, but an IAP candidate does not become an AssetPlan baseline until AssetPlan adopts it through its governed registry, host contract or explicit product decision."
+    },
+    {
+      "rank": 3,
+      "authority": "Industrial UI Modernizer",
+      "rule": "IUM supplies design-engineering, audit, migration and validation methods. It must not redefine AssetPlan business semantics, visual tokens, component lifecycle or product gates."
+    }
+  ],
+  "requiredSources": [
+    {
+      "path": "AGENTS.md",
+      "role": "product-agent-policy",
+      "requiredFor": [
+        "all"
+      ]
+    },
+    {
+      "path": "docs/knowledge-map/README.md",
+      "role": "knowledge-navigation-policy",
+      "requiredFor": [
+        "cross-layer",
+        "architecture"
+      ]
+    },
+    {
+      "path": "docs/knowledge-map/ASSETPLAN_ENGINEERING_KNOWLEDGE_MAP_V1.yaml",
+      "role": "dependency-map",
+      "requiredFor": [
+        "cross-layer",
+        "architecture"
+      ]
+    },
+    {
+      "path": "docs/execution-governor/README.md",
+      "role": "execution-governance",
+      "requiredFor": [
+        "new-branch",
+        "new-pr",
+        "new-capability",
+        "reactivation"
+      ]
+    },
+    {
+      "path": "docs/guardians/GUARDIAN_EXECUTION_POLICY_V1.md",
+      "role": "guardian-policy",
+      "requiredFor": [
+        "gate",
+        "merge",
+        "architecture",
+        "ui"
+      ]
+    },
+    {
+      "path": "docs/guardians/GUARDIAN_REGISTRY_V1.yaml",
+      "role": "guardian-registry",
+      "requiredFor": [
+        "gate",
+        "merge",
+        "architecture",
+        "ui"
+      ]
+    },
+    {
+      "path": "docs/ux-ui/ASSETPLAN_PREMIUM_SCREEN_STANDARD_V1.md",
+      "role": "premium-screen-standard",
+      "requiredFor": [
+        "ui",
+        "screen",
+        "component",
+        "visual-validation"
+      ]
+    },
+    {
+      "path": "docs/ux-ui/ASSETPLAN_VISUAL_DESIGN_SYSTEM_V1.md",
+      "role": "visual-design-system",
+      "requiredFor": [
+        "ui",
+        "screen",
+        "component",
+        "visual-validation"
+      ]
+    },
+    {
+      "path": "docs/ux-ui/AP_PAGE_HEADER_HIERARCHY_V1.md",
+      "role": "screen-hierarchy",
+      "requiredFor": [
+        "ui",
+        "screen",
+        "component",
+        "visual-validation"
+      ]
+    },
+    {
+      "path": "docs/design/ASSETPLAN_PREMIUM_UI_FOUNDATION_SPEC.md",
+      "role": "premium-foundation",
+      "requiredFor": [
+        "ui",
+        "screen",
+        "component"
+      ]
+    },
+    {
+      "path": "power-apps/components/catalog/component-registry.yaml",
+      "role": "component-selection-authority",
+      "requiredFor": [
+        "ui",
+        "screen",
+        "component",
+        "migration"
+      ]
+    },
+    {
+      "path": "power-apps/components/README.md",
+      "role": "component-governance",
+      "requiredFor": [
+        "ui",
+        "screen",
+        "component",
+        "migration"
+      ]
+    },
+    {
+      "path": "power-apps/components/adapted/README.md",
+      "role": "component-operational-catalog",
+      "requiredFor": [
+        "ui",
+        "screen",
+        "component",
+        "migration"
+      ]
+    }
+  ],
+  "componentResolution": {
+    "authority": "power-apps/components/catalog/component-registry.yaml",
+    "rule": "Resolve by capabilityId and allowedForNewScreens at execution time. Never select a component because it has the highest RC/R/V suffix.",
+    "decisionOrder": [
+      "REUSE",
+      "EXTEND_SHARED",
+      "CREATE_SHARED",
+      "LOCAL_ONLY"
+    ],
+    "hardcodeVersionedImplementationsInProfile": false
+  },
+  "visualTruth": {
+    "rule": "Use AssetPlan's current visual standards and Studio evidence. IUM generic DESIGN.md is a quality floor only and cannot replace AssetPlan's visual system.",
+    "visualApprovalRequiresStudioEvidence": true
+  },
+  "functionalTruth": {
+    "rule": "A screenshot proves appearance, not behavior. Power Apps source, flows, SQL/data contracts, ADRs and runtime evidence govern behavior.",
+    "migrationContract": "docs/contracts/POWERAPPS-REACT.md"
+  },
+  "iapBoundary": {
+    "repository": "rubensv74/industrial-application-platform",
+    "rule": "Shared IAP contracts/assets are eligible only after explicit AssetPlan adoption. Product branding, domain semantics, navigation composition and unpromoted candidates remain AssetPlan-owned."
+  },
+  "commands": {
+    "shape": "Use AssetPlan archetypes, product standards and current component registry before proposing structure.",
+    "audit": "Run AssetPlan governance/guardian checks plus IUM technical audit; report them separately.",
+    "critique": "Evaluate operational clarity without replacing AssetPlan visual DNA.",
+    "polish": "Preserve current AssetPlan component and product contracts; no local visual system.",
+    "adapt": "Use reflow/recomposition while preserving AssetPlan shell/context/hierarchy contracts.",
+    "harden": "Preserve AssetPlan truth states, Async Action Guard and governed backend boundaries.",
+    "extract": "Promote reusable candidates only through AssetPlan/IAP lifecycle rules; do not silently centralize product logic.",
+    "recreate": "Treat references as visual evidence only; use current AssetPlan product sources for behavior.",
+    "migrate": "Trace Power Apps formulas/state/actions end-to-end before translating to React/TypeScript.",
+    "validate": "Keep functional, Studio/runtime, responsive, accessibility and visual evidence as separate gates."
+  },
+  "prohibitedAssumptions": [
+    "IUM may override an AssetPlan ADR, design standard, component registry or gate.",
+    "An IAP candidate is automatically an AssetPlan baseline.",
+    "The highest component revision suffix is the current approved implementation.",
+    "Static source inspection is equivalent to Power Apps Studio or visual approval.",
+    "A screenshot is sufficient evidence of functional behavior.",
+    "A migration may change business semantics merely to simplify the target implementation."
+  ]
+}
