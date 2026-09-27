@@ -83,11 +83,30 @@ function eventBlocks(content) {
 function outputNames(content) {
   const lines = content.split("\n");
   const output = [];
+  let inCustom = false;
+
   for (let i = 0; i < lines.length; i++) {
+    if (/^\s{4}CustomProperties:\s*$/.test(lines[i])) {
+      inCustom = true;
+      continue;
+    }
+    if (inCustom && /^\s{4}\S/.test(lines[i]) && !/^\s{6}/.test(lines[i])) {
+      inCustom = false;
+    }
+    if (!inCustom) continue;
+
     const match = lines[i].match(/^\s{6}([A-Za-z0-9_]+):\s*$/);
     if (!match) continue;
-    const text = lines.slice(i, Math.min(lines.length, i + 12)).join("\n");
-    if (/PropertyKind:\s*Output/.test(text)) output.push({ name: match[1], line: i + 1 });
+
+    const start = i;
+    let end = i + 1;
+    for (; end < lines.length; end++) {
+      if (/^\s{6}[A-Za-z0-9_]+:\s*$/.test(lines[end])) break;
+      if (/^\s{4}\S/.test(lines[end]) && !/^\s{6}/.test(lines[end])) break;
+    }
+
+    const text = lines.slice(start, end).join("\n");
+    if (/PropertyKind:\s*Output/.test(text)) output.push({ name: match[1], line: start + 1 });
   }
   return output;
 }
