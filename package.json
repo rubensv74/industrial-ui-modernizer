@@ -12,4 +12,4 @@
     "profile": "node ./bin/ium-profile.mjs",
     "audit:powerapps": "node ./bin/ium-powerapps-audit.mjs"
   }
-}\n
+}
