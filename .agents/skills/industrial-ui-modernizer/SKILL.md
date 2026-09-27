@@ -97,11 +97,14 @@ A visually accurate component with a broken contract is a failed migration.
 
 ## Deterministic checks
 
-Run the repository detector when source files are available:
+Run the applicable deterministic checks when source files are available:
 
 ```bash
 npm test
 npm run audit
+npm run audit:powerapps -- <path-to-power-apps-source>
 ```
 
-Static findings complement, but never replace, runtime and visual verification.
+`audit` targets web/frontend source. `audit:powerapps` targets `*.pa.yaml` Canvas component source and checks event/output contracts, host-boundary smells, interactive hit areas, semantic row interaction, and manually unrolled hierarchy depth.
+
+Static findings complement, but never replace, Power Apps Studio/App Checker, runtime, accessibility, or visual verification.
