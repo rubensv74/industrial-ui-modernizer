@@ -28,6 +28,8 @@ Key files:
 - `design-intelligence/rules/source-rules.json` — deterministic source checks.
 - `bin/ium-audit.mjs` — zero-dependency source detector.
 - `docs/architecture/DESIGN-INTELLIGENCE-V1.md` — architecture and validation model.
+- `profiles/assetplan/profile.json` — AssetPlan authority/adaptation profile.
+- `bin/ium-profile.mjs` — product-profile authority resolver.
 
 ## Commands
 
@@ -54,12 +56,13 @@ npm test
 npm run audit
 node ./bin/ium-audit.mjs ./src
 node ./bin/ium-audit.mjs ./src --json
+npm run profile -- assetplan ui component
 ```
 
 Detector findings are evidence, not a substitute for visual review. Rules that require runtime layout, semantic understanding, or screenshot comparison stay in the agent workflow rather than pretending a regex can prove them.
 
 ## Status
 
-**Design Intelligence v1 foundation** — agent contract, product/design context, Power Apps → React migration contract, deterministic source detector, and test fixture.
+**Design Intelligence v1 foundation** — agent contract, product/design context, Power Apps → React migration contract, deterministic source detector, governed product profiles, and test fixtures.
 
 Next milestones: DOM/runtime detectors, screenshot-diff scoring, component archetype registry, Power Apps parser adapters, and browser-driven verification.
