@@ -16,8 +16,8 @@ const DEFAULT_IGNORES = new Set([
 ]);
 
 function parseArgs(argv) {
-  const flags = new Set(argv.filter((arg) => arg.startsWith("--")));
-  const targets = argv.filter((arg) => !arg.startsWith("--"));
+  const flags = new Set(argv.filter((arg) => arg.startsWith("-")));
+  const targets = argv.filter((arg) => !arg.startsWith("-"));
   return {
     json: flags.has("--json"),
     noFail: flags.has("--no-fail"),
