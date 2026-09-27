@@ -200,7 +200,7 @@ function inspect(content, file, rules, root) {
   }
 
   const maxDepthMatch = content.match(/MaxDepth:[\s\S]*?Default:\s*=([0-9]+)/);
-  const manual = [...content.matchAll(/\{p([0-9]+):LookUp/g)].map((match) => Number(match[1]));
+  const manual = [...content.matchAll(/\bp([0-9]+):LookUp/g)].map((match) => Number(match[1]));
   if (maxDepthMatch && manual.length) {
     const maxDepth = Number(maxDepthMatch[1]);
     const maxP = Math.max(...manual);
