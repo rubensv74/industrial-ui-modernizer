@@ -323,3 +323,31 @@ PRODUCT APPROVED COMPONENT
 Do not report an IAP component as missing after searching only the product repository.
 
 For AssetPlan, preserve product-owned domain compositions such as Asset Passport and Visual Preservation Workspace while reusing IAP primitives underneath them.
+
+
+## Formal high-fidelity recomposition workflow
+
+When the task is to materially transform an existing screen so that it converges with a high-fidelity visual reference, use the formal assignment:
+
+`workflows/PREMIUM_SCREEN_RECOMPOSITION_ASSIGNMENT.md`
+
+This workflow is mandatory when:
+
+- the current screen is functionally valid but visually far from the target;
+- previous iterations only changed styling or isolated components;
+- the user expects a structural redesign rather than a cosmetic polish;
+- the screen must preserve business/data contracts while changing composition substantially.
+
+The workflow requires:
+
+- Functional Preservation Map;
+- Visual Gap Analysis;
+- Composition Contract;
+- Component Reuse Map;
+- truthful data classification;
+- full-screen recomposition;
+- mandatory pre-delivery self-review;
+- complete Power Apps Source Code delivery;
+- separate compile/runtime and visual gates.
+
+Do not substitute the universal short invocation when the task clearly requires high-fidelity recomposition.
