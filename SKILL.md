@@ -291,3 +291,35 @@ For AssetPlan, additionally apply the repository authorities:
 AssetPlan-specific prompt:
 
 `docs/ai/prompts/APPLY_VISUAL_SYSTEM_V2_TO_ANY_SCREEN.md`
+
+
+## Industrial Application Platform lookup
+
+For AssetPlan, TMS and other products participating in the shared UI programme, component discovery must not stop at the product repository.
+
+Before `CREATE_SHARED` or `LOCAL_ONLY`, inspect:
+
+`rubensv74/industrial-application-platform`
+
+Authorities:
+
+- `components/canvas/candidates/`
+- `docs/ui/contracts/`
+- `docs/ui/patterns/`
+- `docs/ui/gates/IAP_UI_30_CAPABILITY_SOURCE_BASELINE_CLOSEOUT.md`
+
+The thirty-item programme is governed as **30 UX capabilities**, not 30 arbitrary Canvas definitions. Some are visual components, others are interaction/layout patterns or product compositions.
+
+Mandatory resolution sequence:
+
+```text
+PRODUCT APPROVED COMPONENT
+-> IAP SHARED CAPABILITY / CONTRACT
+-> EXTEND EXISTING SHARED
+-> CREATE SHARED
+-> LOCAL_ONLY
+```
+
+Do not report an IAP component as missing after searching only the product repository.
+
+For AssetPlan, preserve product-owned domain compositions such as Asset Passport and Visual Preservation Workspace while reusing IAP primitives underneath them.
