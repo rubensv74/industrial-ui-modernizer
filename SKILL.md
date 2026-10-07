@@ -397,3 +397,36 @@ The workflow requires:
 - separate compile/runtime and visual gates.
 
 Do not substitute the universal short invocation when the task clearly requires high-fidelity recomposition.
+
+
+## AssetPlan loading curtain adoption
+
+For AssetPlan screens that perform a material blocking data load, the product-specific loading curtain is mandatory:
+
+`cmp_AP_LoadingCurtainPro`
+
+Use it for:
+- initial project/screen data preparation;
+- project-context changes that invalidate the visible workspace;
+- coordinated multi-source loads;
+- blocking rebuild/finalization phases where the screen must not remain interactive.
+
+Do not use it for:
+- lightweight filter changes;
+- local row refresh;
+- small lazy sub-panel loads;
+- background refreshes that do not invalidate the whole screen.
+
+For those non-blocking cases prefer local busy state or `cmp_IAP_SkeletonLoader` where content-level loading needs a visible placeholder.
+
+The host owns `VisibleState`, `ProgressText`, title/subtitle and all loading state. The curtain owns only presentation.
+
+When modernizing an existing AssetPlan screen:
+1. locate any local full-screen loading overlay/spinner;
+2. preserve its exact busy-state predicate;
+3. replace the local overlay implementation with `cmp_AP_LoadingCurtainPro`;
+4. map the current stage/message into `ProgressText`;
+5. keep the curtain as the final top-level visual child so it covers the whole screen;
+6. never introduce a second competing full-screen loading overlay.
+
+This requirement is part of AssetPlan Runtime Adoption and must be checked on every screen.
