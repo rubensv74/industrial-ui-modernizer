@@ -75,6 +75,52 @@ Choose one primary archetype:
 
 Do not copy another screen's layout merely because it looks premium.
 
+### 2A. IAP capability adoption audit
+
+For products participating in the Industrial Application Platform programme, modernization is also a **runtime adoption task**. The agent must actively evaluate the governed 30-capability baseline rather than merely reuse components it already remembers.
+
+Read:
+
+- `rubensv74/industrial-application-platform/docs/ui/gates/IAP_UI_30_CAPABILITY_SOURCE_BASELINE_CLOSEOUT.md`
+- applicable contracts in `docs/ui/contracts/`
+- applicable patterns in `docs/ui/patterns/`
+
+Create an `IAP_CAPABILITY_ADOPTION_MAP` covering all 30 capabilities with exactly one disposition:
+
+```text
+ADOPT_NOW
+ALREADY_SATISFIED
+DEFER_NO_REAL_CONTRACT
+NOT_APPLICABLE
+```
+
+For every `ADOPT_NOW` capability record:
+
+```text
+CAPABILITY_ID
+CAPABILITY_NAME
+COMPONENT_OR_PATTERN
+PLACEMENT_IN_SCREEN
+HOST_DATA_CONTRACT
+EVENT_CONTRACT
+WHY_IT_IMPROVES_THE_TASK
+```
+
+Foundation capabilities require explicit treatment on every premium screen:
+
+```text
+01 Page Header
+02 Global / Persistent Context Bar
+03 Context Breadcrumb
+04 Cross-screen Context Retention
+20 Responsive Layout System
+30 Skeleton / loading experience where asynchronous loading is material
+```
+
+Do not silently omit one of these. If not adopted, document why.
+
+The adoption programme's goal is not “use every component everywhere”. It is to ensure every screen deliberately adopts the applicable new capabilities and does not regress to legacy local UI patterns.
+
 ### 3. Declare composition contract
 
 Before editing, define:
